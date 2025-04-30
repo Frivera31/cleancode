@@ -7,20 +7,15 @@ def load_environment_variables():
     load_dotenv()
     return os.getenv("API_KEY_SEARCH_GOOGLE"), os.getenv("SEARCH_ENGINE_ID")
 
-
 def build_search_url(api_key, search_engine_id, query, page, lang):
     """Construye la URL para la API de Google Custom Search."""
     return f"https://www.googleapis.com/customsearch/v1?key={api_key}&cx={search_engine_id}&q={query}&start={page}&lr={lang}"
-
-
 
 def perform_search(url):
     """Realiza la solicitud a la API y devuelve los resultados."""
     response = requests.get(url)
     response.raise_for_status()  # Lanza un error si la respuesta es un error
     return response.json().get('items', [])
-
-
 
 def display_results(results):
 
